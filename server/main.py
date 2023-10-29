@@ -16,6 +16,7 @@ def db_conn():
     conn = psycopg2.connect(**db_config)
     return conn
 
+# Post a review
 @app.route("/reviews", methods=['POST'])
 def post_review():
     if request.method == "POST":
@@ -44,9 +45,43 @@ def post_review():
             conn.close()
 
             # Return json object saying success
-            return jsonify({"message": "Review created successfully"}), 201
+            return jsonify({"message": f"Review for {book_name} created successfully"}), 201
         except Exception as e:
             return jsonify({'error': str(e)}), 500
+        
+# Get all reviews
+@app.route("/reviews") # default method GET
+def get_reviews():
+    if request.method ==  "GET":
+        try:
+            # Establish databse connection
+            conn = db_conn()
+            cur = conn.cursor()
+
+            # SQL query
+            cur.execute(
+                "SELECT * FROM reviews"
+            )
+
+            # Fetch all reviews and put into list of dictionary
+            review_records = cur.fetchall() # creates a list of tuples where tuples contain all data from columns
+            reviews = []
+
+            for record in review_records:
+                review = {
+                    "book_name": record[1], # get all data from each tuple
+                    "book_author": record[2],
+                    "book_review": record[3]
+                }
+                reviews.append(review)
+            
+            cur.close()
+            conn.close()
+
+            return jsonify(reviews)
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
