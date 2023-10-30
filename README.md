@@ -3,6 +3,8 @@
 A book review web application.
 
 Server side
-"cd server"
-"source venv/bin/activate" - activate the virtual environment
-"python main.py" - run the server
+
+1. "cd server"
+2. "source venv/bin/activate" - activate the virtual environment
+   or "venv\Scripts\activate" on windows
+   "python main.py" - run the server
