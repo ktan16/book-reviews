@@ -89,9 +89,10 @@ def get_reviews():
                 if book_genres:
                     genre_names = [item[2] for item in book_genres]
 
-                # Create a review entry
+                # Create a review json entry
                 review = {
-                    "book_name": record[1], # get all data from each tuple
+                    "book_id": record[0], # get all data from each tuple
+                    "book_name": record[1],
                     "book_author": record[2],
                     "book_review": record[3],
                     "book_genres": genre_names
@@ -101,7 +102,7 @@ def get_reviews():
             cur.close()
             conn.close()
 
-            return jsonify(reviews)
+            return jsonify(reviews), 201
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
