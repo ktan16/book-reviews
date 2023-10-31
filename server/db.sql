@@ -1,5 +1,5 @@
 -- Init database
-CREATE DATABASE BookReviews;
+CREATE DATABASE "BookReviews";
 
 -- Create tables
 CREATE TABLE reviews(
