@@ -40,3 +40,20 @@ def post_review(request):
             return JsonResponse({"message": f"Review for {book_name} created successfully"}, status=201) 
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
+
+# Get all reviews
+def get_reviews(request):
+    if request.method == "GET":
+        try:
+            reviews = Reviews.objects.all()
+            reviews_data = []
+
+            for review in reviews:
+                genre_names = [
+                    # 
+                    genre.genre_name for genre in review.bookgenre_set.all() 
+                ]
+                
+            return
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
