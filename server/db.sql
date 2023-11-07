@@ -38,3 +38,4 @@ INSERT INTO genres (genre_name) VALUES ('Mystery');
 INSERT INTO genres (genre_name) VALUES ('Crime');
 INSERT INTO genres (genre_name) VALUES ('Drama');
 INSERT INTO genres (genre_name) VALUES ('Novel');
+INSERT INTO genres (genre_name) VALUES ('Short Story');
